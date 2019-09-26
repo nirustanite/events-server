@@ -22,6 +22,17 @@ router.put('/event/:id', (req,res,next) => {
          .catch(next)
 });
 
+router.get('/event',(req,res,next) => {
+    Event.findAll()
+         .then(event => {
+             if(event){
+                 return res.send(event);
+             }
+             return res.status(404).end();
+         })
+         .catch(next);
+});
+
 router.get('/event/:id', (req,res,next) => {
     Event.findByPk(req.params.id)
          .then(event => {
